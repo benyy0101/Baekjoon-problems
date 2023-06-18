@@ -1,28 +1,19 @@
 def solution(n, arr1, arr2):
     answer = []
+    
     for i in range(n):
-        answer.append(bin_or(to_bin(arr1[i],n),to_bin(arr2[i], n)))
+        temp = ''
         
+        str1 = bin(arr1[i]).replace('0b','')
+        str1 = '0' * (n - len(str1)) + str1
+        str2 = bin(arr2[i]).replace('0b','')
+        str2 =  '0' * (n - len(str2)) + str2
+        
+        for j in range(n):
+            if str1[j] == '1' or str2[j] == '1':
+                temp += '#'
+            else:
+                temp += ' '
+        answer.append(temp)
+            
     return answer
-
-def to_bin(n,size):
-    num = ''
-    while n > 0:
-        rem = n % 2
-        num += str(rem)
-        n //= 2
-        
-    while len(num) < size:
-        num += '0'
-    return num[::-1]
-
-def bin_or(a,b):
-    result = ''
-    for i in range(len(a)):
-        temp1 = a[i]
-        temp2 = b[i]
-        if temp1 == '1' or temp2 == '1':
-            result += '#'
-        else:
-            result += ' '
-    return result
