@@ -1,25 +1,19 @@
 import java.util.Scanner;
 
 public class Main {
-
 	public static void main(String[] args) {
-		// TODO Auto-generated method stub
 		Scanner sc = new Scanner(System.in);
-		char[] target = sc.nextLine().toCharArray();
-		
-		StringBuilder bs = new StringBuilder();
-		
-		for(int i = 0; i < target.length; i++) {
-			char temp = target[i];
-			if(!Character.isUpperCase(temp)) {
-				bs.append(Character.toUpperCase(temp));
+		StringBuilder sb = new StringBuilder();
+		char[] target = sc.next().toCharArray();
+		for (char item: target) {
+			if(Character.isUpperCase(item)) {
+				sb.append(Character.toLowerCase(item));
 			}
 			else {
-				bs.append(Character.toLowerCase(temp));
+				sb.append(Character.toUpperCase(item));
 			}
 		}
-		
-		System.out.println(bs);
+		System.out.println(sb.toString());
 	}
-
+	
 }
