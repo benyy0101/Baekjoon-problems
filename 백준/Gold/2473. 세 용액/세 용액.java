@@ -1,41 +1,44 @@
-import java.io.*;
-import java.util.*;
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.util.Arrays;
+import java.util.StringTokenizer;
 
 public class Main {
-
-	public static void main(String[] args) throws IOException{
+	public static void main(String[] args) throws IOException {
 		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-		int n = Integer.parseInt(br.readLine());
-		int[] arr = new int[n];
-		StringTokenizer st = new StringTokenizer(br.readLine());
-		for(int i=0; i<n; i++) {
-			arr[i] = Integer.parseInt(st.nextToken());
-		}
+		int N = Integer.parseInt(br.readLine());
 		
-		Arrays.sort(arr);
-		long min = Long.MAX_VALUE;
-		int r1=0, r2=0, r3=0;
-		out : for(int i=0; i<n-2; i++) {
+		long[] line = new long[N];
+		long answer = Long.MAX_VALUE;
+		long num1 = 0;
+		long num2 = 0;
+		long num3 = 0;
+		StringTokenizer st = new StringTokenizer(br.readLine());
+		
+		for(int i = 0; i < N;i++) {
+			line[i] = Long.parseLong(st.nextToken());
+		}
+		Arrays.sort(line);
+		top:
+		for(int i = 0; i < N-2;i++) {
 			int left = i+1;
-			int right = n-1;
-			
-			while(left<right) {
-				long sum = (long)arr[i]+ arr[left] +arr[right];
-				if(min > Math.abs(sum)) {
-					min = Math.abs(sum);
-					r1 =i; r2=left; r3=right;
+			int right = N-1;
+			while(left < right) {
+				long temp = line[i] + line[left] + line[right];
+				if(Math.abs(temp) < answer) {
+					answer = Math.abs(temp);
+					num1 = line[i];
+					num2 = line[left];
+					num3 = line[right];
 				}
-				if(sum==0) {
-					r1 =i; r2=left; r3=right;
-					break out;
-				}else if(sum > 0){
-					right--;
-				}else {
-					left++;
-				}
-				
+				if(temp < 0) left++;
+				else if(temp > 0)right--;
+				else break top;
 			}
 		}
-		System.out.println(arr[r1]+" " + arr[r2] + " " + arr[r3]);
+		StringBuilder sb = new StringBuilder();
+		sb.append(num1).append(" ").append(num2).append(" ").append(num3).append(" ");
+		System.out.println(sb);
 	}
 }
