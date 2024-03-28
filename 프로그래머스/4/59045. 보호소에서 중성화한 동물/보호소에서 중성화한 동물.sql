@@ -1,0 +1,2 @@
+-- 코드를 입력하세요
+SELECT t1.ANIMAL_ID, t1.ANIMAL_TYPE, t1.NAME from animal_ins t1 inner join animal_outs t2 using(animal_id) where t1.sex_upon_intake like 'Intact%' and (t2.sex_upon_outcome like '%Spayed%' or t2.sex_upon_outcome like '%Neutered%') order by animal_id
