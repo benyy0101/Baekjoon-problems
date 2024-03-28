@@ -1,0 +1,2 @@
+-- 코드를 입력하세요
+SELECT t1.category, sum(sales) as total_sales from book t1 inner join book_sales t2 on t1.book_id = t2.book_id where date_format(sales_date, '%Y-%m') = '2022-01' group by category order by category
