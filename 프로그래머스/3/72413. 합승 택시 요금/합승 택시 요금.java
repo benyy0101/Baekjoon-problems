@@ -2,7 +2,7 @@ import java.util.*;
 
 class Solution {
     public int solution(int n, int s, int a, int b, int[][] fares) {
-        int INF = 100001 * n;
+        int INF = 100000 * n + 1;
         int[][] map = new int[n][n];
         
         for(int i = 0; i < n;i++){
@@ -28,9 +28,6 @@ class Solution {
             }
         }
         
-//         for(int i = 0 ; i <n;i++){
-//             System.out.println(Arrays.toString(map[i]));
-//         }
         int answer = map[s-1][a-1] + map[s-1][b-1];
         for(int i = 0;i < n;i++){
             if(i != a -1 || i != b-1 || i != s-1){
