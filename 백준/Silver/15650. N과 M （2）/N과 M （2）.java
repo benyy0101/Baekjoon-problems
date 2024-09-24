@@ -1,35 +1,41 @@
-
-import java.util.Arrays;
-import java.util.Scanner;
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.util.StringTokenizer;
 
 public class Main {
-	static int m;
-	static int n;
-	static int[] output;
-	static StringBuilder sb;
-	public static void main(String[] args) {
-		Scanner sc = new Scanner(System.in);
+	static int N, M;
+	static int[] arr;
+	static boolean[] v;
+	
+	public static void main(String[] args) throws IOException {
+		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+		StringTokenizer st = new StringTokenizer(br.readLine());
 		
-		n = sc.nextInt();
-		m = sc.nextInt();
-		output = new int[m];
-		combination(0,1);
+		N = Integer.parseInt(st.nextToken());
+		M = Integer.parseInt(st.nextToken());
+		arr = new int[M];
+		v = new boolean[N];
+		
+		dfs(0,0);
 	}
 	
-	public static void combination(int depth, int start) {
-		if(depth == m) {
-			sb = new StringBuilder();
-		
-			for(int item:output) {
-				sb.append(item+" ");
+	public static void dfs(int depth, int start) {
+		if(depth == M) {
+			StringBuilder sb = new StringBuilder();
+			for(int i:arr) {
+				sb.append(i).append(" ");
 			}
-			System.out.println(sb.toString());
+			System.out.println(sb);
 			return;
 		}
 		
-		for(int i = start; i<= n;i++) {
-			output[depth] = i;
-			combination(depth+1,i+1);
+		for(int i = start ; i < N;i++) {
+			if(v[i]) continue;
+			v[i] = true;
+			arr[depth] = i+1;
+			dfs(depth+1,i+1);
+			v[i] = false;
 		}
 	}
 }
