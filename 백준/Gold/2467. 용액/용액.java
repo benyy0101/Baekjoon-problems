@@ -13,23 +13,31 @@ public class Main {
 		for(int i = 0 ; i < N;i++) {
 			list[i] = Integer.parseInt(st.nextToken());
 		}
-		
-		int left = 0;
-		int right = N-1;
-		int ans_left = 0;
-		int ans_right = N-1;
-		int sum = Integer.MAX_VALUE;
-		while(right> left) {
-			int temp = list[right]+ list[left];
-			if(Math.abs(temp) <= sum) {
-				ans_right = right;
-				ans_left = left;
-				sum = Math.abs(temp);
-				if(sum == 0) break;
+		int min = Integer.MAX_VALUE;
+		int minRight = 0;
+		int minLeft = 0;
+		for(int i = 0 ; i < N;i++) {
+			int target = list[i];
+			int right = list.length - 1;
+			int left = i+1;
+			int mid;
+			
+			while(left <= right) {
+				mid = (right - left) / 2 + left;
+				int temp =Math.abs(target + list[mid]); 
+				if(temp < min ) {
+					min = temp;
+					minRight = mid;
+					minLeft = i;					
+				}
+				
+				if(list[mid] + target < 0) {
+					left = mid+1;
+				}
+				else right = mid-1;
 			}
-			if(temp > 0) right--;
-			else left++;
 		}
-		System.out.println(list[ans_left]+" "+list[ans_right]);
+		
+		System.out.println(list[minLeft] + " " + list[minRight]);
 	}
 }
